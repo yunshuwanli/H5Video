@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ToolBarTheme"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ToolBarTheme" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <com.yswl.priv.h5vedioapp.view.WebViewWithProgress
+                android:id="@+id/royte_wv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <ImageButton
+        android:visibility="gone"
+        android:id="@+id/player"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/bg_cricle_alpha"
+        android:alpha="0.4"
+        android:layout_gravity="bottom|end"
+        android:src="@mipmap/ic_refresh_normal" />
+
+</android.support.design.widget.CoordinatorLayout>
+
+

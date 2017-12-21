@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="adBlockUrl">
+        <item>lz.bjbsti.com</item>
+        <item>img.rzlc.org</item>
+        <item>www.feizhu3.club</item>
+        <item>slb.azurewish.com</item>
+        <item>https://lz.bjbsti.com</item>
+        <item>nx01.nxbrother.com</item>
+        <item>http://www.sytcyf.com/</item>
+        <item>lm.vdjha.com</item>
+        <item>http://apk.wwlwwl.cn</item>
+        <item>xx.sh041.com</item>
+        <item>hm.baidu.com</item>
+    </string-array>
+</resources>
