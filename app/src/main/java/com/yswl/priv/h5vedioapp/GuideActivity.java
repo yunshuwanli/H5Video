@@ -30,7 +30,7 @@ public class GuideActivity extends AppCompatActivity {
         setContentView(R.layout.activity_guide);
         setTitle("视频解析");
         mRecyclerView = (RecyclerView) findViewById(R.id.guide_rec_view);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         myAdapter = new MyAdapter(getDummyDatas());
         mRecyclerView.setAdapter(myAdapter);
     }

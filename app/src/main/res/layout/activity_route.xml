@@ -14,36 +14,31 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:theme="@style/ToolBarTheme"
+            app:theme="@style/ToolBarTheme"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ToolBarTheme" />
+            app:popupTheme="@style/ToolBarTheme.OverflowMenuStyle" />
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-            <com.yswl.priv.h5vedioapp.view.WebViewWithProgress
-                android:id="@+id/royte_wv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
     </android.support.v4.widget.NestedScrollView>
 
-    <ImageButton
+    <ImageView
         android:visibility="gone"
         android:id="@+id/player"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_margin="20dp"
-        android:background="@drawable/bg_cricle_alpha"
-        android:alpha="0.4"
+        android:alpha="0.6"
         android:layout_gravity="bottom|end"
-        android:src="@mipmap/ic_refresh_normal" />
-
+        android:src="@mipmap/ic_player" />
+    <!--android:background="@drawable/bg_cricle_alpha"-->
 </android.support.design.widget.CoordinatorLayout>
 
 
