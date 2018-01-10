@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="adBlockUrl">
+        <item>http://t.maopaotuan.com</item>
+        <item>http://tt.myhaohaizi.com/</item>
+        <item>https://app.aokog.com/</item>
         <item>lz.bjbsti.com</item>
         <item>img.rzlc.org</item>
         <item>www.feizhu3.club</item>
         <item>slb.azurewish.com</item>
-        <item>https://lz.bjbsti.com</item>
         <item>nx01.nxbrother.com</item>
         <item>http://www.sytcyf.com/</item>
         <item>lm.vdjha.com</item>

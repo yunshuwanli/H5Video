@@ -79,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 ORIGINAL_URL = url;
             }
         });
-
     }
+
 
     private boolean isLandscape() {
         Display display = getWindowManager().getDefaultDisplay();//计算此时手机的宽度和高度，来进行判断，是否需要显示标题
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             "http://www.82190555.com/index/qqvod.php?url=",
             "http://jx.vgoodapi.com/jx.php?url=",
             "http://api.91exp.com/svip/?url=",
-            "http://player.jidiaose.com/supapi/iframe.php?v=",//优酷
+            "http://player.jidiaose.com/supapi/iframe.php?v="//优酷
     };
     public final static String[] NAME = {
             "通用线路一",
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             "通用线路四",
             "通用线路五",
             "通用线路六",
-            "优酷线路",
+            "优酷线路"
     };
 
     @Override
@@ -213,7 +213,6 @@ public class MainActivity extends AppCompatActivity {
 
             mWebview.getWebview().stopLoading();
             // 退出时调用此方法，移除绑定的服务，否则某些特定系统会报错
-            mWebview.getWebview().getSettings().setJavaScriptEnabled(false);
             mWebview.getWebview().clearHistory();
             mWebview.getWebview().clearView();
             mWebview.removeAllViews();

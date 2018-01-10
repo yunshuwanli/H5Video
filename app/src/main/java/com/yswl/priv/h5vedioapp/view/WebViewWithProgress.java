@@ -28,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yswl.priv.h5vedioapp.RouteActivity;
+import com.yswl.priv.h5vedioapp.tool.ADFilterTool;
 
 import java.lang.ref.WeakReference;
 
@@ -158,7 +159,7 @@ public class WebViewWithProgress extends RelativeLayout {
     public class JSObject {
         @JavascriptInterface
         public void getVideoUrl(String videoUrl) {
-            Log.e(TAG,"getVideoUrl 03 : " + videoUrl);
+            Log.e(TAG, "getVideoUrl 03 : " + videoUrl);
             if (!TextUtils.isEmpty(videoUrl) && loadFullScreenCallBack != null) {
                 loadFullScreenCallBack.onFullScreenJump(videoUrl);
             }
@@ -228,47 +229,42 @@ public class WebViewWithProgress extends RelativeLayout {
             super.onPageStarted(view, url, favicon);
         }
 
+
         @Override
         public void onPageFinished(WebView view, String url) {
             Log.e(TAG, "onPageFinished url:" + url);
+            super.onPageFinished(view, url);
             checkUrl(url);
-            if (isLoadDetailH5) {
+            if (false) {
                 Log.e(TAG, "注入js");
                 String js = "var script = document.createElement('script');";
                 js += "script.type = 'text/javascript';";
                 js += "function android(){";
                 js += "var url = document.getElementsByTagName('video')[0].src;";
-//                js += "window.JSObject.getVideoUrl(url);";
+                js += "window.JSObject.getVideoUrl(url);";
                 js += "return url;";
                 js += "}";
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     mWebview.evaluateJavascript("javascript:" + js, new ValueCallback<String>() {
                         @Override
                         public void onReceiveValue(String value) {
-
+                            Log.e(TAG, "onReceiveValue 02 " + value);
                         }
                     });
-                    mWebview.postDelayed(new Runnable() {
-                        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    mWebview.evaluateJavascript("javascript:android()", new ValueCallback<String>() {
                         @Override
-                        public void run() {
-                            mWebview.evaluateJavascript("javascript:android()", new ValueCallback<String>() {
-                                @Override
-                                public void onReceiveValue(String value) {
-                                    Log.e(TAG,"onReceiveValue 02 "+value);
-                                    if (!TextUtils.isEmpty(value)&& !value.equals("null")&& loadFullScreenCallBack != null) {
-                                        loadFullScreenCallBack.onFullScreenJump(value);
-                                    }
-                                }
-                            });
+                        public void onReceiveValue(String value) {
+                            Log.e(TAG, "onReceiveValue 02 " + value);
+                            if (!TextUtils.isEmpty(value) && !value.equals("null") && loadFullScreenCallBack != null) {
+                                loadFullScreenCallBack.onFullScreenJump(value);
+                            }
                         }
-                    },2000);
+                    });
 
                 } else {
                     mWebview.loadUrl("javascript:" + js);
                     mWebview.loadUrl("javascript:android()");
                 }
-                super.onPageFinished(view, url);
             }
         }
 
@@ -320,34 +316,36 @@ public class WebViewWithProgress extends RelativeLayout {
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
             Log.e(TAG, "shouldInterceptRequesturl " + url);
-            return super.shouldInterceptRequest(view, url);
-//                if (!ADFilterTool.hasAd(view.getContext(), url)) {
-//                    Log.e(TAG, "shouldInterceptRequesturl 加载" + url);
-//
-//                } else {
-//                    Log.e(TAG, "shouldInterceptRequesturl 拦截");
-//                    return new WebResourceResponse(null, null, null);
-//                }
+
+            if (!ADFilterTool.hasAd(view.getContext(), url)) {
+                Log.e(TAG, "shouldInterceptRequesturl 加载 " + url);
+                return super.shouldInterceptRequest(view, url);
+            } else {
+                Log.e(TAG, "shouldInterceptRequesturl 拦截 ");
+                return new WebResourceResponse(null, null, null);
+            }
         }
 
 
         @Override
         public void onLoadResource(WebView view, String url) {
             Log.e(TAG, "onLoadResource " + url);
-            checkUrl(url);
-            super.onLoadResource(view, url);
-//                if (!ADFilterTool.hasAd(view.getContext(), url)) {
-//                    Log.e(TAG, "onLoadResource 加载..." + url);
-//                }
+            if (!ADFilterTool.hasAd(view.getContext(), url)) {
+                Log.e(TAG, "onLoadResource 加载..." + url);
+                checkUrl(url);
+                super.onLoadResource(view, url);
+            }
         }
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             Log.e(TAG, "shouldOverrideUrlLoading " + url);
-            checkUrl(url);
-//                view.loadUrl(url);
 
-            return false;
+            if (!ADFilterTool.hasAd(view.getContext(), url)) {
+                checkUrl(url);
+                view.loadUrl(url);
+            }
+            return true;
         }
 
         @Override

@@ -17,14 +17,8 @@ public class ADFilterTool {
         return false;
     }
 
-    public static boolean hasHomeUrl(Context context, String url) {
-        Resources resources = context.getResources();
-        String[] homeUrls = resources.getStringArray(R.array.adBlockUrl);
-        for (String homeUrl : homeUrls) {
-            if (url.contains(homeUrl)) {
-                return true;
-            }
-        }
-        return false;
+    public static boolean hasAd2(Context context, String url) {
+        return url.contains(".gif");
     }
+
 }
